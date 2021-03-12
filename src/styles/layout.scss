@@ -1,0 +1,12 @@
+/**
+  * @description 布局样式
+*/
+@charset 'utf-8';
+@import './reset.scss';
+@import './fonts.scss';
+@import './animation.scss';
+
+#app {
+  height: 100%;
+  width: 100%;
+}
