@@ -10,7 +10,7 @@
             <div class="bullshit-oops">{{ oops }}</div>
             <div class="bullshit-headline">{{ headline }}</div>
             <div class="bullshit-info">{{ info }}</div>
-            <a class="bullshit-return-home" href="#/home">
+            <a class="bullshit-return-home" href="#/">
               {{ jumpTime }}s&nbsp;{{ btn }}
             </a>
           </div>
@@ -21,37 +21,50 @@
 </template>
 
 <script>
-import { getCurrentInstance, onMounted, onUnmounted, reactive, toRefs } from 'vue'
+import { onMounted, onUnmounted, reactive, toRefs } from 'vue'
+import { useRouter } from 'vue-router'
 export default {
   name: '404',
   setup () {
+    // 定义响应式数据
     const bullshit = reactive({
       jumpTime: 5,
       oops: '抱歉!',
       headline: '当前页面不存在...',
       info: '请检查您输入的网址是否正确，或点击下面的按钮返回首页。',
       btn: '返回首页',
-      timer: 0
+      timer: null
     })
-    // 获取当前实例
-    const { ctx } = getCurrentInstance()
+
+    // 使用router
+    const router = useRouter()
+    
+    // 时间改变
     const timeChange = () => {
       bullshit.timer = setInterval(() => {
         if (bullshit.jumpTime) {
           bullshit.jumpTime--
         } else {
-          ctx.$router.push({ path: '/home' })
-          clearInterval(bullshit.timer)
+          router.push({ path: '/home' })
+          handlerClearInterval()
         }
       }, 1000)
     }
+
+    // 处理清除定时器
+    const handlerClearInterval = () => {
+      bullshit.timer && clearInterval(bullshit.timer)
+      bullshit.timer = null
+    }
+    
     // 组件挂载
     onMounted(() => {
       timeChange()
     })
+
     // 组件销毁
     onUnmounted(() => {
-      clearInterval(bullshit.timer)
+      handlerClearInterval()
     })
 
     return {

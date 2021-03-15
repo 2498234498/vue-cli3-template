@@ -2,6 +2,7 @@
  * @description 导入所有vuex模块，自动加入namespaced:true，用于解决vuex命名冲突，请勿修改。
 */
 import { createStore } from 'vuex'
+import getters from './getters'
 
 const files = require.context('./modules', false, /\.js$/)
 const modules = {}
@@ -14,5 +15,6 @@ Object.keys(modules).forEach((key) => {
 })
 
 export default createStore({
-  modules
+  modules,
+  getters
 })

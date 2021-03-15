@@ -7,3 +7,17 @@ export function login (data) {
     data
   })
 }
+
+export function getUserInfo () {
+  return request({
+    url: '/api/auth/user'
+  })
+}
+
+export function refreshToken (data) {
+  return request({
+    url: '/api/auth/token',
+    method: 'post',
+    data
+  })
+}

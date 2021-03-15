@@ -8,5 +8,7 @@ import './styles/layout.scss'
 import installElementPlus from './plugins/element-plus'
 
 const app = createApp(App)
+
 installElementPlus(app)
+
 app.use(store).use(router).mount('#app')

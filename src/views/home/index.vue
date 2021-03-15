@@ -3,12 +3,17 @@
 </template>
 
 <script>
-import { getCurrentInstance } from 'vue'
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 export default {
   name: 'Home',
   setup () {
-    const { ctx } = getCurrentInstance()
-    console.log(ctx)
+    const store = useStore()
+    const userInfo = computed(() => store.getters.userInfo)
+    // console.table(userInfo.value)
+    return {
+      userInfo
+    }
   }
 }
 </script>

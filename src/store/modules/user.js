@@ -1,7 +1,16 @@
-import { login } from '@/api/user'
+import { login, getUserInfo } from '@/api/user'
 import { setToken } from '@/utils/token'
-const state = {}
-const mutations = {}
+
+const state = {
+  userInfo: null
+}
+
+const mutations = {
+  setUserInfo: (state, userInfo) => {
+    state.userInfo = userInfo
+  }
+}
+
 const actions = {
   login ({ commit }, { username, password }) {
     return new Promise(async (resolve, reject) => {
@@ -10,7 +19,8 @@ const actions = {
         const { token, refreshToken } = data
         setToken('token', token)
         setToken('refreshToken', refreshToken)
-        console.log(data)
+        const userInfo = await getUserInfo()
+        commit('setUserInfo', userInfo.data)
         resolve()
       } catch (error) {
         reject(error)
@@ -18,4 +28,5 @@ const actions = {
     })
   }
 }
+
 export default { state, mutations, actions }

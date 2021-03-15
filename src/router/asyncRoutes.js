@@ -1,5 +1,5 @@
 const asyncRoutes = {
-  path: '/home',
+  path: '/',
   name: 'Home',
   component: () => import('@/views/home')
 }
