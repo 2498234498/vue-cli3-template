@@ -1,20 +1,13 @@
 <template>
-  <div>home</div>
+  <lazyload></lazyload>
 </template>
 
 <script>
-import { computed } from 'vue'
-import { useStore } from 'vuex'
+import lazyload from '@/components/lazyload'
 export default {
   name: 'Home',
-  setup () {
-    const store = useStore()
-    const userInfo = computed(() => store.getters.userInfo)
-    // console.table(userInfo.value)
-    return {
-      userInfo
-    }
-  }
+  components: { lazyload },
+  setup () {}
 }
 </script>
 
