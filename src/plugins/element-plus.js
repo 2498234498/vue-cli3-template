@@ -173,11 +173,13 @@ const plugins = [
   ElNotification
 ]
 
-export default app => {
-  components.forEach(component => {
-    app.component(component.name, component)
-  })
-  plugins.forEach(plugin => {
-    app.use(plugin)
-  })
+export default {
+  install: app => {
+    components.forEach(component => {
+      app.component(component.name, component)
+    })
+    plugins.forEach(plugin => {
+      app.use(plugin)
+    })
+  }
 }
